@@ -1,0 +1,72 @@
+<h1> Event List </h1>
+<div class="container">
+
+ <!-- ---------------------- Items for page -------------------------- -->
+<div class="form-group align" >
+  <label for="" class="form-label mt-4"> Items For Page </label>
+  <select class="form-select" id="exampleSelect1" [(ngModel)]="pageTotal" (ngModelChange)="pageFilter()">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+  </select>
+</div>
+
+<!-- ------------------------Filter Input------------------------- -->
+<div class="form-group align">
+  <fieldset>
+    <label  class="form-label mt-4" for="readOnlyInput">Filter Type Event:</label>
+    <input  class="form-control" id="readOnlyInput" type="text" placeholder="Type Event" readonly=""
+            [(ngModel)]="typeFilter" (ngModelChange)="filterInput()">
+  </fieldset>
+</div><br>
+
+<!-- ------------------------Filter Precio --------------------------- -->
+<fieldset class="form-group align">
+  <label class="form-label" for="filterRange">Filtra por precio: </label>
+  <input type="range" class="form-range" id="customRange1" min="0" max="100" [(ngModel)]="pricefilter" (ngModelChange)="filterInput()" >
+</fieldset>
+
+<!-- ------------------------Number Matches --------------------------- -->
+<div class="card border-primary mb-3 align">
+  <div class="card-body">
+    <h5 class="card-title">There are {{eventsFiltrado.length}} Matches.</h5>
+    <p class="card-text" *ngIf="eventsFiltrado.length == 0" > No Events found </p>
+  </div>
+</div>
+
+<!-- ------------------------Table ------------------------------------ -->
+<div *ngIf="eventsFiltrado.length > 0" >
+  <table class="table table-hover" id="table">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col" ><h5> Event </h5></th>
+        <th scope="col" ><h5> Type Event </h5></th>
+        <th scope="col" ><h5> Date Event </h5></th>
+        <th scope="col" ><h5> Place Event </h5></th>
+        <th scope="col" ><h5> Price Event </h5></th>
+        <th scope="col" ><h5> Actions </h5></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="table-active" *ngFor="let event of eventsFiltrado | paginate:{itemsPerPage: total, currentPage:p }">
+            <td> {{event.name }} </td>
+            <td> {{event.type}} </td>
+            <td> {{event.date | date:"dd/MM/yy"}} </td>
+            <td> {{event.place}}</td>
+            <td> {{event.price}} €</td>
+            <td *ngIf="role == 'buyer'" > <button> Comprador </button> </td>
+            <td *ngIf="role == 'administrator'" > <button (click)="eventDelete(event)"> Eliminar </button> </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div> 
+
+<!-- ----------------------------Pagination ------------------------- -->
+<ul class="pagination ">
+<li class="page-item " id="pagination" >
+  <pagination-controls class="page-link" (pageChange)="p = $event"  ></pagination-controls>
+
+</li>
+</ul>

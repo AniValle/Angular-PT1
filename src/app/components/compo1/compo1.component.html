@@ -1,0 +1,32 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a *ngIf="!loggedIn()" routerLink="/login" class="nav-link" 
+            data-bs-toggle="tab" aria-selected="true" role="tab"> Login </a>
+          </li>
+  
+          <li *ngIf="!loggedIn()" class="nav-item" role="presentation">
+            <a routerLink="/register" class="nav-link" data-bs-toggle="tab" 
+            aria-selected="false" role="tab" tabindex="-1"> Register </a>
+          </li>
+  
+          <li *ngIf="loggedIn()"  class="nav-item" role="presentation">
+            <a routerLink="/events" class="nav-link" data-bs-toggle="tab" 
+            aria-selected="false" role="tab" tabindex="-1"> Events </a>
+          </li>
+  
+          <li *ngIf="loggedIn()"  class="nav-item" role="presentation">
+            <a routerLink="/logout" class="nav-link" data-bs-toggle="tab" 
+            aria-selected="true" role="tab" tabindex="-1"> Logout </a>
+          </li>
+
+          <li *ngIf="loggedIn()"  class="nav-item" role="presentation">
+            <a class="nav-link active " data-bs-toggle="tab" 
+            role="tab" tabindex="-1"> Welcome {{getUsernameAndRole()}} {{user | titlecase}}  {{role | titlecase}} </a>
+          </li>
+
+      </ul>
+  </div>
+</nav>

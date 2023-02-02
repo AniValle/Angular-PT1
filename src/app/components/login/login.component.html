@@ -1,44 +1,59 @@
 <div class="container">
     <h2> Login </h2>
-    <br>
+    <br>   
     <form [formGroup]="miformlogin" (ngSubmit)="submit()">
-        <p> Username: 
-            <input type="text" formControlName="username" >
-            <span  *ngIf="this.miformlogin.get('username')?.errors?.['required'] && 
-                         this.miformlogin.get('username')?.touched">
-                El nombre de usuario no puede estar vacío.
-            </span>
-            <span   *ngIf="this.miformlogin.get('username')?.errors?.['minlength']&& 
-                            this.miformlogin.get('username')?.touched">
-                El nombre de usuario no puede tener menos de 6 letras.
-            </span>
-            <span   *ngIf="this.miformlogin.get('username')?.errors?.['pattern'] && 
-                    this.miformlogin.get('username')?.touched">
-                El nombre de usuario solo puede tener letras.
-            </span>
-        </p>
+        <fieldset>
 
-        <p> Password:
-            <input type="password" formControlName="pass">
-            <span  *ngIf="this.miformlogin.get('pass')?.errors?.['required'] && 
-                         this.miformlogin.get('pass')?.touched">
-                Password no puede estar vacío.
-            </span>
-            <span  *ngIf="this.miformlogin.get('pass')?.errors?.['minlength'] && 
-                         this.miformlogin.get('pass')?.touched">
-                La contraseña no puede tener menos de 8 caracteres.
-            </span>
-            <span   *ngIf="this.miformlogin.get('pass')?.errors?.['pattern'] && 
-                    this.miformlogin.get('pass')?.touched">
-                La contraseña solo permite letras y números.
-            </span>
-        </p>
+        <!-- ------------------------- Username --------------------------- -->
 
-        <button type="submit" [disabled]="miformlogin.invalid">Clica!!!</button>
-    </form>
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> Username: </label>
+            <div>
+                <input class="style-input" type="text"  formControlName="username" placeholder="Enter Username" ><br>
+                <span class="invalid-input" *ngIf="this.miformlogin.get('username')?.errors?.['required'] && 
+                             this.miformlogin.get('username')?.touched">
+                    Username cannot be empty.
+                </span>
+                <span class="invalid-input" *ngIf="this.miformlogin.get('username')?.errors?.['minlength'] && 
+                             this.miformlogin.get('username')?.touched">
+                        Username cannot be less than 6 letters.
+                </span>
+            </div>
+        </div>
 
-    <div>
-        {{datos}}
+        <!-- ------------------------- Password --------------------------- -->
+
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> Password: </label>
+            <div>
+                <input class="style-input" type="password" formControlName="pass" placeholder="Password" ><br>
+                <span class="invalid-input" *ngIf="this.miformlogin.get('pass')?.errors?.['required'] && 
+                             this.miformlogin.get('pass')?.touched">
+                    Password cannot be empty.
+                </span>
+                <span class="invalid-input" *ngIf="this.miformlogin.get('pass')?.errors?.['minlength'] && 
+                             this.miformlogin.get('pass')?.touched">
+                    The password cannot be less than 8 characters.  
+                </span>
+            </div><br>
+        </div>
+
+        <!-- ------------------------- Button --------------------------- -->
+
+        <button id="b" class="btn btn-outline-light " type="submit" [disabled]="miformlogin.invalid" > Login!!!</button>
+        
+    </fieldset><br>
+
+    <div class="card border-secondary ms-5" style="max-width: 20rem;">
+        <h4 class="card-title"> {{response}} </h4>
+            <div *ngFor="let i of datos">
+                {{i}}          
+            </div>
     </div>
 
+    </form>
+    
 </div>
+
+
+        

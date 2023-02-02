@@ -2,122 +2,162 @@
 
     <h2> Registrate! </h2>
     <br>
+    <p class="text-secondary">  Fields with * are required </p><br>
+
     <form [formGroup]="miform" (ngSubmit)="submit()">
+        <fieldset>
 
-        <p> Nombre de Usuario: 
-            <input type="text" formControlName="nombre" appNomProhibido>
-            <span  *ngIf="this.miform.get('nombre')?.errors?.['required'] && 
-                         this.miform.get('nombre')?.dirty">
-                El nombre de usuario no puede estar vacío.
-            </span>
-            <span   *ngIf="this.miform.get('nombre')?.errors?.['minlength']&& 
-                            this.miform.get('nombre')?.touched">
-                El nombre de usuario no puede tener menos de 6 letras.
-            </span>
-            <span   *ngIf="this.miform.get('nombre')?.errors?.['pattern'] && 
-                    this.miform.get('nombre')?.touched">
-                El nombre de usuario solo puede tener letras.
-            </span>
-            <span   *ngIf="this.miform.get('nombre')?.errors?.['validate'] && 
-                    this.miform.get('nombre')?.touched">
-                El nombre es prohibido. 
-            </span>
-        
-        </p>
-        <p> Contraseña: 
-            <input type="text" formControlName="pass" appMayusculas>
-            <span  *ngIf="this.miform.get('pass')?.errors?.['required'] && 
-                         this.miform.get('pass')?.touched">
-                La contraseña no puede estar vacío.
-            </span>
-            <span  *ngIf="this.miform.get('pass')?.errors?.['minlength'] && 
-                         this.miform.get('pass')?.touched">
-                La contraseña no puede tener menos de 8 caracteres.
-            </span>
-            <span   *ngIf="this.miform.get('pass')?.errors?.['pattern'] && 
-                    this.miform.get('pass')?.touched">
-                La contraseña solo permite letras y números.
-            </span>
-            <span   *ngIf="this.miform.get('pass')?.errors?.['mayusculas'] && 
-                    this.miform.get('pass')?.touched">
-                La contraseña debe tener por lo menos una vocal mayusculas.
-            </span>
-        </p>
+        <!-- ------------------------- Username --------------------------- -->
+            <div class="form-group">
+                <label for="" class="form-label mt-4"> *Username: </label>
+                <div>
+                    <input class="style-input" placeholder="Enter Username" type="text" formControlName="username" appNomProhibido>
+                    <span class="invalid-input" *ngIf="this.miform.get('username')?.errors?.['required'] && 
+                                 this.miform.get('username')?.dirty">
+                        Username cannot be empty.
+                    </span>
+                    <span  class="invalid-input" *ngIf="this.miform.get('username')?.errors?.['minlength']&& 
+                                    this.miform.get('username')?.touched">
+                        Username cannot be less than 6 letters.
+                    </span>
+                    <span class="invalid-input"  *ngIf="this.miform.get('username')?.errors?.['pattern'] && 
+                            this.miform.get('username')?.touched">
+                        Username only allows letters and numbers.
+                    </span>
+                    <span class="invalid-input"  *ngIf="this.miform.get('username')?.errors?.['validate'] && 
+                            this.miform.get('username')?.touched">
+                        Username is prohibited. 
+                    </span>
+                </div>
+            </div>
+        <!-- ------------------------- Password --------------------------- -->
 
-        <p> Confirmar Contraseña: 
-            <input type="text" formControlName="confir_contraseña" 
-            appRepitePass [parametro]="this.miform.value.pass" >
-            <span  *ngIf="this.miform.get('confir_contraseña')?.errors?.['required'] && 
-                         this.miform.get('confir_contraseña')?.touched">
-                Confirmar contraseña no puede estar vacío.
-            </span>
-            <span  *ngIf="this.miform.get('confir_contraseña')?.errors?.['repitePass'] && 
-                         this.miform.get('confir_contraseña')?.touched">
-                La contraseña no coincide.
-            </span>
-        </p>
-
-        <p> Correo: 
-            <input type="text" formControlName="correo" appNotNumeros>
-            <span  *ngIf="this.miform.get('correo')?.errors?.['required'] && 
-                        this.miform.get('correo')?.touched">
-                El correo no puede estar vacío
-            </span>
-           
-            <span   *ngIf="this.miform.get('correo')?.errors?.['pattern'] && 
-                    this.miform.get('correo')?.touched">
-                El correo no tiene el formato correcto
-            </span>
-            <span   *ngIf="this.miform.get('correo')?.errors?.['numeros'] && 
-                    this.miform.get('correo')?.touched">
-                <!-- El correo no puede tener numeros -->
-                El correo no puede iniciar con numeros.
-            </span>
-        </p>
-
-        <p> Estado Civil:
-            <select id="estadoC" formControlName="civil">
-                <option *ngFor="let n of civil" selected > {{n}} </option>
-            </select>
-
-            <span  *ngIf="this.miform.get('civil')?.errors?.['required'] &&
-                    this.miform.get('civil')?.touched">
-                Tienes que seleccionar una opción.
-            </span>
-
-        </p>
-
-        <p> Sexo:
-            <input type="radio" id="dona" value="dona" formControlName="sexo"> Dona
-            <input type="radio" id="home" value="home" formControlName="sexo"> Home
-            <input type="radio" id="altres" value="altres" formControlName="sexo"> Altres
-            
-            <span *ngIf="this.miform.get('sexo')?.errors?.['required'] && 
-                    this.miform.get('sexo')?.untouched" >
-                Campo obligatorio*
-            </span>
-        </p>
-        
-        <div> De qué quieres recibir información? 
-            <p *ngFor="let i of informacion">
-                <input type="checkbox" formControlName="info" value="{{i}}" >
-                <label> {{i}}</label>
-            </p>
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Password: </label>
+            <div>
+                <input class="style-input" placeholder="Password" type="text" formControlName="pass" appMayusculas>
+                <span class="invalid-input" *ngIf="this.miform.get('pass')?.errors?.['required'] && 
+                             this.miform.get('pass')?.touched">
+                    Password cannot be empty.
+                </span>
+                <span class="invalid-input" *ngIf="this.miform.get('pass')?.errors?.['minlength'] && 
+                             this.miform.get('pass')?.touched">
+                    The password cannot be less than 8 characters.  
+                </span>
+                <span  class="invalid-input" *ngIf="this.miform.get('pass')?.errors?.['pattern'] && 
+                        this.miform.get('pass')?.touched">
+                    Password only allows letters and numbers.
+                </span>
+                <span  class="invalid-input" *ngIf="this.miform.get('pass')?.errors?.['mayusculas'] && 
+                        this.miform.get('pass')?.touched">
+                    The password must have at least one uppercase vowel.
+                </span>
+            </div>
         </div>
 
-        <p> Aceptar Condiciones 
-            <input type="checkbox" formControlName="aceptar">
-            <span *ngIf="this.miform.get('aceptar')?.errors?.['requiredTrue'] && 
-                    this.miform.get('aceptar')?.untouched">
-                Haz de aceptar las Condiciones.
-            </span>
-        </p>
+        <!-- ------------------------- Confirm Password --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Confirm Password: </label>
+            <div>
+                <input class="style-input" placeholder="Confirm Password"  type="text" formControlName="confirm_pass" 
+                appRepitePass [parametro]="this.miform.value.pass" >
+                <span class="invalid-input"  *ngIf="this.miform.get('confirm_pass')?.errors?.['required'] && 
+                             this.miform.get('confirm_pass')?.touched">
+                    Confirm password cannot be empty.
+                </span>
+                <span class="invalid-input"  *ngIf="this.miform.get('confirm_pass')?.errors?.['repitePass'] && 
+                             this.miform.get('confirm_pass')?.touched">
+                    Password does not match.
+                </span>
+            </div>
+        </div>
 
-        <button type="submit" [disabled]="miform.invalid">Clica!!!</button>
+        <!-- ------------------------- Email --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Email: </label>
+            <div>
+                <input class="style-input" placeholder="Email" type="text" formControlName="email" appNotNumeros>
+                <span class="invalid-input" *ngIf="this.miform.get('email')?.errors?.['required'] && 
+                            this.miform.get('email')?.touched">
+                    Email cannot be empty
+                </span>
+               
+                <span class="invalid-input"  *ngIf="this.miform.get('email')?.errors?.['pattern'] && 
+                        this.miform.get('email')?.touched">
+                    The email is not in the correct format
+                </span>
+                <span class="invalid-input"  *ngIf="this.miform.get('email')?.errors?.['numeros'] && 
+                        this.miform.get('email')?.touched">
+                    Mail cannot start with numbers.
+                </span>
+            </div>
+        </div>
+
+        <!-- ------------------------- Civil Status --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Civil Status: </label>
+            <div>
+                <select class="form-select" id="estadoC" formControlName="civilStatus">
+                    <option *ngFor="let s of statuses" selected > {{s}} </option>
+                </select>
+    
+                <span class="invalid-input" *ngIf="this.miform.get('civilStatus')?.errors?.['required'] &&
+                        this.miform.get('civilStatus')?.touched">
+                    Select your marital status.
+                </span>
+            </div>
+        </div> 
+
+        <!-- ------------------------- Gender --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Gender: </label>
+            <div class="form-check" *ngFor="let gender of genders">
+                <label class="form-check-label" for="{{gender}}"> {{gender}} </label>
+                <input class="form-check-input" type="radio" id="{{gender}}" value="{{gender}}" formControlName="gender">
+            </div>
+            <span class="invalid-input" *ngIf="this.miform.get('gender')?.errors?.['required'] && 
+                    this.miform.get('gender')?.untouched" >
+                Campo obligatorio*
+            </span>
+        </div>        
+        
+        <!-- ------------------------- Information of interest --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> Information of interest: </label>
+            <div class="form-check" *ngFor="let i of informations">
+                <input class="form-check-input" type="checkbox" formControlName="info" value="{{i}}" >
+                <label class="form-check-label" > {{i}}</label>
+            </div>
+        </div>
+
+        <!-- ------------------------- Accept Conditions --------------------------- -->
+        <div class="form-group">
+            <label for="" class="form-label mt-4"> *Accept Conditions : </label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" formControlName="acceptConditions">
+                <span class="invalid-input"  *ngIf="this.miform.get('acceptConditions')?.errors?.['requiredTrue'] && 
+                    this.miform.get('acceptConditions')?.untouched">
+                    Accept the conditions.
+                </span>
+            </div><br>
+        </div>
+
+        <!-- ------------------------- Button --------------------------- -->
+
+        <button id="b" class="btn btn-outline-light" type="submit" [disabled]="miform.invalid"> Sign up!!!</button>
+    </fieldset><br>
+
+    <div class="card border-secondary ms-5" style="max-width: 20rem;">
+        <div class="card">
+        <h4 class="card-title"> {{response}} </h4>
+            <div *ngFor="let i of datos">
+                {{i}}          
+            </div>
+        </div>
+    </div>
 
     </form>
-    <div>
-        {{datos}}
-    </div>
 </div>
+
+
 
