@@ -9,7 +9,7 @@
 
         <!-- ------------------------- Username --------------------------- -->
             <div class="form-group">
-                <label for="" class="form-label mt-4"> *Username: </label>
+                <label class="form-label mt-4"> *Username: </label>
                 <div>
                     <input class="style-input" placeholder="Enter Username" type="text" formControlName="username" appNomProhibido>
                     <span class="invalid-input" *ngIf="this.miform.get('username')?.errors?.['required'] && 

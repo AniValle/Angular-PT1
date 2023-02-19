@@ -74,12 +74,9 @@ export class LoginComponent {
 
   // ---------------------- Redirects -----------------------//
   /**
-   * successfulLogin function redirects to '/compo1'
+   * successfulLogin function redirects to '/events'
    */
   successfulLogin(): void{
-    this.router.navigateByUrl('/events')
-  }
-  successfulLogin2(): void{
     this.router.navigateByUrl('/events')
   }
 
@@ -98,7 +95,7 @@ export class LoginComponent {
       if (this.validUser.role == "buyer"){
         this.successfulLogin();
       }else if(this.validUser.role == "administrator"){
-        this.successfulLogin2();
+        this.successfulLogin();
       }
     }else{
     this.response = "Incorrect Credentials"
